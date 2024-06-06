@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,12 +30,15 @@ public class Rota {
     private Long id;
 
     @Column(name = "nm_rota")
+    @NotBlank(message = "O nome da rota não pode estar em branco")
     private String nome;
 
     @Column(name = "origem_rota")
+    @NotBlank(message = "A origem da rota não pode estar em branco")
     private String origem;
 
     @Column(name = "destino_rota")
+    @NotBlank(message = "O destino da rota não pode estar em branco")
     private String destino;
 
     @OneToMany(mappedBy = "rota", cascade = CascadeType.ALL, orphanRemoval = true)

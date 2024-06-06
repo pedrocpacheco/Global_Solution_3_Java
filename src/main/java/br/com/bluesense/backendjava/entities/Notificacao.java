@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Notificacao {
     private Long id;
 
     @Column(name = "mensagem_notificacao")
+    @NotBlank(message = "A mensagem da notificação não pode estar em branco")
     private String mensagem;
 
     @CreationTimestamp

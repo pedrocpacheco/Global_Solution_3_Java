@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,9 +33,11 @@ public class Sensor {
     private Long id;
 
     @Column(name = "modelo_sensor")
+    @NotBlank(message = "O modelo do sensor não pode estar em branco")
     private String modelo;
 
     @Column(name = "marca_sensor")
+    @NotBlank(message = "A marca do sensor não pode estar em branco")
     private String marca;
 
     @Enumerated(EnumType.STRING)
