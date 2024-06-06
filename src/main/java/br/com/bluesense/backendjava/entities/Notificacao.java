@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import br.com.bluesense.backendjava.entities.user.Usuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +30,8 @@ public class Notificacao {
     private LocalDateTime dataCriacao;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "autoridade_id", nullable = false)
+    private Autoridade autoridade;
 
     @OneToOne(mappedBy = "notificacao")
     private Leitura leitura;
