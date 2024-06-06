@@ -1,0 +1,22 @@
+meta {
+  name: Criar Autoridade
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/autoridades
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "nome": "Autoridade Exemplo",
+      "email": "autoridade@example.com",
+      "senha": "senha123",
+      "departamento": "Departamento Exemplo",
+      "descricao": "Descrição da Autoridade"
+  }
+  
+}

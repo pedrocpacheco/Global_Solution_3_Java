@@ -5,33 +5,34 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 
 @Entity
 @Table(name = "TB_ROTA")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rota {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rota")
     private Long id;
 
-    @Column(name = "nm_origem")
+    @Column(name = "nm_rota")
     private String nome;
 
     @Column(name = "origem_rota")
     private String origem;
 
-    @Column(name = "origem_destino")
+    @Column(name = "destino_rota")
     private String destino;
 
     @OneToMany(mappedBy = "rota", cascade = CascadeType.ALL, orphanRemoval = true)

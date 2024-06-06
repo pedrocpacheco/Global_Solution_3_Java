@@ -13,9 +13,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "TB_NOTIFICACAO")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Notificacao {
     
     @Id
