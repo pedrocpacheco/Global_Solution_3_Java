@@ -1,8 +1,8 @@
-package br.com.bluesense.dtos.notificacao;
+package br.com.bluesense.backendjava.dtos.notificacao;
 
 import java.time.LocalDateTime;
 
-import br.com.bluesense.dtos.autoridade.AutoridadeDTO;
+import br.com.bluesense.backendjava.dtos.autoridade.AutoridadeDTO;
 
 public class NotificacaoDTO {
   private Long id;

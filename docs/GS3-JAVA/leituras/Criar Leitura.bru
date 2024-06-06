@@ -1,0 +1,27 @@
+meta {
+  name: Criar Leitura
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/leituras
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "valor": "Temperatuara Acima da Média",
+      "rota": {
+          "id": 1
+      },
+      "sensor": {
+          "id": 1
+      },
+      "notificacao": {
+          "id": 1
+      }
+  }
+  
+}

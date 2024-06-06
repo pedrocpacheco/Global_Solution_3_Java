@@ -1,5 +1,6 @@
 package br.com.bluesense.backendjava.controllers;
 
+import br.com.bluesense.backendjava.dtos.leitura.LeituraResponseDto;
 import br.com.bluesense.backendjava.entities.Leitura;
 import br.com.bluesense.backendjava.services.LeituraService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class LeituraController {
     }
 
     @PostMapping
-    public Leitura createLeitura(@RequestBody Leitura leitura) {
+    public LeituraResponseDto createLeitura(@RequestBody Leitura leitura) {
         return leituraService.createLeitura(leitura);
     }
 

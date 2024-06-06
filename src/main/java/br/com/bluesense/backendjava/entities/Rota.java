@@ -2,6 +2,8 @@ package br.com.bluesense.backendjava.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,5 +38,6 @@ public class Rota {
     private String destino;
 
     @OneToMany(mappedBy = "rota", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Leitura> leituras;
 }

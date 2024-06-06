@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bluesense.backendjava.dtos.notificacao.NotificacaoDTO;
+import br.com.bluesense.backendjava.dtos.notificacao.NotificacaoResponseDTO;
 import br.com.bluesense.backendjava.services.NotificacaoService;
-import br.com.bluesense.dtos.notificacao.NotificacaoDTO;
 
 @RestController
 @RequestMapping("/notificacoes")
@@ -36,7 +37,7 @@ public class NotificacaoController {
     }
 
     @PostMapping
-    public NotificacaoDTO createNotificacao(@RequestBody NotificacaoDTO notificacao) {
+    public NotificacaoResponseDTO createNotificacao(@RequestBody NotificacaoDTO notificacao) {
         return notificacaoService.createNotificacao(notificacao);
     }
 

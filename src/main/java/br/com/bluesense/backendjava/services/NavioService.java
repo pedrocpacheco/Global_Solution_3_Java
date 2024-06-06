@@ -1,10 +1,10 @@
 package br.com.bluesense.backendjava.services;
 
+import br.com.bluesense.backendjava.dtos.navio.NavioRequestDto;
+import br.com.bluesense.backendjava.dtos.navio.NavioResponseDto;
 import br.com.bluesense.backendjava.entities.navio.Navio;
+import br.com.bluesense.backendjava.mappers.NavioMapper;
 import br.com.bluesense.backendjava.repositories.NavioRepository;
-import br.com.bluesense.dtos.navio.NavioRequestDto;
-import br.com.bluesense.dtos.navio.NavioResponseDto;
-import br.com.bluesense.mappers.NavioMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.bluesense.backendjava.dtos.autoridade.AutoridadeDTO;
+import br.com.bluesense.backendjava.dtos.notificacao.NotificacaoDTO;
+import br.com.bluesense.backendjava.dtos.notificacao.NotificacaoResponseDTO;
 import br.com.bluesense.backendjava.entities.Autoridade;
 import br.com.bluesense.backendjava.entities.Notificacao;
 import br.com.bluesense.backendjava.repositories.NotificacaoRepository;
-import br.com.bluesense.dtos.autoridade.AutoridadeDTO;
-import br.com.bluesense.dtos.notificacao.NotificacaoDTO;
 
 @Service
 public class NotificacaoService {
@@ -28,10 +29,11 @@ public class NotificacaoService {
         return notificacaoRepository.findById(id).map(this::convertToDTO);
     }
 
-    public NotificacaoDTO createNotificacao(NotificacaoDTO notificacaoDTO) {
+    public NotificacaoResponseDTO createNotificacao(NotificacaoDTO notificacaoDTO) {
         Notificacao notificacao = convertToEntity(notificacaoDTO);
         Notificacao savedNotificacao = notificacaoRepository.save(notificacao);
-        return convertToDTO(savedNotificacao);
+        var responseDto = new NotificacaoResponseDTO(savedNotificacao);
+        return responseDto;
     }
 
     public Optional<NotificacaoDTO> updateNotificacao(Long id, NotificacaoDTO notificacaoDetails) {

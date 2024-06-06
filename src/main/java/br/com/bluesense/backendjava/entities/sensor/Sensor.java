@@ -2,6 +2,8 @@ package br.com.bluesense.backendjava.entities.sensor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.bluesense.backendjava.entities.Leitura;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,6 +41,7 @@ public class Sensor {
     private TipoSensor tipoSensor;
 
     @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Leitura> leituras;
 
 }

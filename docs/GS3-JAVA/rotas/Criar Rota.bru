@@ -1,0 +1,21 @@
+meta {
+  name: Criar Rota
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/rotas
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "id": 1,
+      "nome": "Rota Exemplo",
+      "origem": "Origem Exemplo",
+      "destino": "Destino Exemplo"
+  }
+  
+}

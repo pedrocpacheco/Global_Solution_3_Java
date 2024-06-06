@@ -1,4 +1,4 @@
-package br.com.bluesense.dtos.navio;
+package br.com.bluesense.backendjava.dtos.navio;
 
 import br.com.bluesense.backendjava.entities.navio.TipoNavio;
 

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bluesense.backendjava.dtos.navio.NavioRequestDto;
+import br.com.bluesense.backendjava.dtos.navio.NavioResponseDto;
 import br.com.bluesense.backendjava.entities.navio.Navio;
 import br.com.bluesense.backendjava.services.NavioService;
-import br.com.bluesense.dtos.navio.NavioRequestDto;
-import br.com.bluesense.dtos.navio.NavioResponseDto;
 import jakarta.validation.Valid;
 
 @RestController

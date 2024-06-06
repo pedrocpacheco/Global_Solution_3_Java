@@ -1,4 +1,4 @@
-package br.com.bluesense.dtos.autoridade;
+package br.com.bluesense.backendjava.dtos.autoridade;
 
 public class AutoridadeDTO {
   private Long id;

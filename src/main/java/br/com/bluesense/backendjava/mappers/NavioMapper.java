@@ -1,11 +1,11 @@
-package br.com.bluesense.mappers;
+package br.com.bluesense.backendjava.mappers;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.bluesense.backendjava.dtos.navio.NavioRequestDto;
+import br.com.bluesense.backendjava.dtos.navio.NavioResponseDto;
 import br.com.bluesense.backendjava.entities.navio.Navio;
-import br.com.bluesense.dtos.navio.NavioRequestDto;
-import br.com.bluesense.dtos.navio.NavioResponseDto;
 
 public abstract class NavioMapper {
 
