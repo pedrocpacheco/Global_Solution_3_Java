@@ -1,12 +1,16 @@
 package br.com.bluesense.backendjava.services;
 
-import br.com.bluesense.backendjava.entities.Rota;
-import br.com.bluesense.backendjava.repositories.RotaRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.bluesense.backendjava.entities.Rota;
+import br.com.bluesense.backendjava.repositories.RotaRepository;
 
 @Service
 public class RotaService {
@@ -14,8 +18,13 @@ public class RotaService {
     @Autowired
     private RotaRepository rotaRepository;
 
-    public List<Rota> getAllRotas() {
-        return rotaRepository.findAll();
+    public Page<Rota> getAllRotas(int page, int size, String sortBy, String sortOrder) {
+        // Convertendo as informações de paginação e ordenação para Pageable
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        if (sortOrder.equalsIgnoreCase("desc")) {
+            pageable = ((PageRequest) pageable).withSort(Sort.by(sortBy).descending());
+        }
+        return rotaRepository.findAll(pageable);
     }
 
     public Optional<Rota> getRotaById(Long id) {

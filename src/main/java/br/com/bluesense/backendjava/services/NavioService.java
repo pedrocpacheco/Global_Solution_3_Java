@@ -7,9 +7,10 @@ import br.com.bluesense.backendjava.mappers.NavioMapper;
 import br.com.bluesense.backendjava.repositories.NavioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,9 +19,9 @@ public class NavioService {
     @Autowired
     private NavioRepository navioRepository;
 
-    public List<NavioResponseDto> getAllNavios() {
-        var dtos = NavioMapper.createDtosFromEntities(navioRepository.findAll());
-        return dtos;
+    public Page<NavioResponseDto> getAllNavios(Pageable pageable) {
+        Page<Navio> navios = navioRepository.findAll(pageable);
+        return navios.map(NavioMapper::entityToResponseDto);
     }
 
     public Optional<Navio> getNavioById(Long id) {
@@ -48,5 +49,4 @@ public class NavioService {
             return true;
         }).orElse(false);
     }
-    
 }

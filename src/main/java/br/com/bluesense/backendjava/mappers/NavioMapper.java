@@ -31,4 +31,13 @@ public abstract class NavioMapper {
         .collect(Collectors.toList());
   }
 
+  public static NavioResponseDto entityToResponseDto(Navio navio) {
+    return new NavioResponseDto(
+        navio.getNome(),
+        navio.getMarca(),
+        navio.getModelo(),
+        navio.getTipoNavio()
+    );
+}
+
 }

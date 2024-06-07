@@ -3,10 +3,13 @@ package br.com.bluesense.backendjava.controllers;
 import br.com.bluesense.backendjava.entities.sensor.Sensor;
 import br.com.bluesense.backendjava.services.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,8 +20,18 @@ public class SensorController {
     private SensorService sensorService;
 
     @GetMapping
-    public List<Sensor> getAllSensores() {
-        return sensorService.getAllSensores();
+    public ResponseEntity<Page<Sensor>> getAllSensores(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortOrder
+    ) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        if (sortOrder.equalsIgnoreCase("desc")) {
+            pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
+        }
+        Page<Sensor> sensors = sensorService.getAllSensores(pageable);
+        return ResponseEntity.ok(sensors);
     }
 
     @GetMapping("/{id}")

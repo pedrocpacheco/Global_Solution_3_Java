@@ -1,10 +1,13 @@
 package br.com.bluesense.backendjava.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.bluesense.backendjava.dtos.leitura.LeituraResponseDto;
@@ -18,15 +21,19 @@ public class LeituraService {
     @Autowired
     private LeituraRepository leituraRepository;
 
-    public List<Leitura> getAllLeituras() {
-        return leituraRepository.findAll();
+    public Page<Leitura> getAllLeituras(int page, int size, String sortBy, String sortOrder) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        if (sortOrder.equalsIgnoreCase("desc")) {
+            pageable = ((PageRequest) pageable).withSort(Sort.by(sortBy).descending());
+        }
+        return leituraRepository.findAll(pageable);
     }
 
     public Optional<Leitura> getLeituraById(Long id) {
         return leituraRepository.findById(id);
     }
 
-     public LeituraResponseDto createLeitura(Leitura leitura) {
+    public LeituraResponseDto createLeitura(Leitura leitura) {
         try {
             leituraRepository.save(leitura);
         } catch (DataIntegrityViolationException e) {
@@ -35,10 +42,9 @@ public class LeituraService {
             } else {
                 throw e;
             }
-         }
-        var responseDto = new LeituraResponseDto(leitura); 
-        return responseDto;
         }
+        return new LeituraResponseDto(leitura);
+    }
 
     public Optional<Leitura> updateLeitura(Long id, Leitura leituraDetails) {
         return leituraRepository.findById(id).map(leitura -> {
