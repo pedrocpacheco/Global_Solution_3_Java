@@ -10,21 +10,29 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/sensores")
+@Api(tags = "Sensores")
 public class SensorController {
 
     @Autowired
     private SensorService sensorService;
 
     @GetMapping
+    @ApiOperation(value = "Obter todos os sensores", response = Page.class)
     public ResponseEntity<Page<Sensor>> getAllSensores(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortOrder
+            @ApiParam(value = "Número da página", defaultValue = "0") @RequestParam(defaultValue = "0") int page,
+            @ApiParam(value = "Tamanho da página", defaultValue = "10") @RequestParam(defaultValue = "10") int size,
+            @ApiParam(value = "Campo para ordenação", defaultValue = "id") @RequestParam(defaultValue = "id") String sortBy,
+            @ApiParam(value = "Ordem de classificação (asc ou desc)", defaultValue = "asc") @RequestParam(defaultValue = "asc") String sortOrder
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         if (sortOrder.equalsIgnoreCase("desc")) {
@@ -35,24 +43,33 @@ public class SensorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Sensor> getSensorById(@PathVariable Long id) {
+    @ApiOperation(value = "Obter um sensor pelo ID", response = Sensor.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Sensor encontrado com sucesso"),
+            @ApiResponse(code = 404, message = "Sensor não encontrado")
+    })
+    public ResponseEntity<Sensor> getSensorById(@ApiParam(value = "ID do sensor") @PathVariable Long id) {
         Optional<Sensor> sensor = sensorService.getSensorById(id);
         return sensor.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Sensor createSensor(@RequestBody Sensor sensor) {
+    @ApiOperation(value = "Criar um novo sensor", response = Sensor.class)
+    public Sensor createSensor(@ApiParam(value = "Detalhes do novo sensor a ser criado") @RequestBody Sensor sensor) {
         return sensorService.createSensor(sensor);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sensor> updateSensor(@PathVariable Long id, @RequestBody Sensor sensorDetails) {
+    @ApiOperation(value = "Atualizar um sensor existente", response = Sensor.class)
+    public ResponseEntity<Sensor> updateSensor(@ApiParam(value = "ID do sensor a ser atualizado") @PathVariable Long id, 
+                                                @ApiParam(value = "Detalhes do sensor atualizado") @RequestBody Sensor sensorDetails) {
         Optional<Sensor> sensorOptional = sensorService.updateSensor(id, sensorDetails);
         return sensorOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSensor(@PathVariable Long id) {
+    @ApiOperation(value = "Excluir um sensor pelo ID")
+    public ResponseEntity<Void> deleteSensor(@ApiParam(value = "ID do sensor a ser excluído") @PathVariable Long id) {
         if (sensorService.deleteSensor(id)) {
             return ResponseEntity.noContent().build();
         } else {
