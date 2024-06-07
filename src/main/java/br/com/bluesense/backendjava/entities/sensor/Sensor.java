@@ -47,4 +47,5 @@ public class Sensor {
     @JsonIgnore
     private List<Leitura> leituras;
 
+    
 }
